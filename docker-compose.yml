@@ -1,7 +1,7 @@
 version: '3.2'
 
 services:
-  elasticsearch:
+  elasticsearch01:
     build:
       context: elasticsearch/
       args:
@@ -26,11 +26,83 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      ELASTIC_PASSWORD: changeme
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks
-      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-      discovery.type: single-node
+      - node.name=elasticsearch01
+      - cluster.name=elasticsearch-cluster
+      - discovery.seed_hosts=elasticsearch02,elasticsearch03
+      - cluster.initial_master_nodes=elasticsearch01,elasticsearch02,elasticsearch03
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS: "-Xmx512m -Xms512m"
+      - ELASTIC_PASSWORD: changeme
+    networks:
+      - elk
+
+  elasticsearch02:
+    build:
+      context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+        type: bind
+        source: ./elasticsearch/config/log4j2.properties
+        target: /usr/share/elasticsearch/config/log4j2.properties
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+      - type: bind
+        source: ./elasticsearch/logs
+        target: /usr/share/elasticsearch/logs
+        read_only: false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - node.name=elasticsearch02
+      - cluster.name=elasticsearch-cluster
+      - discovery.seed_hosts=elasticsearch01,elasticsearch03
+      - cluster.initial_master_nodes=elasticsearch01,elasticsearch02,elasticsearch03
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS: "-Xmx512m -Xms512m"
+      - ELASTIC_PASSWORD: changeme
+    networks:
+      - elk
+
+  elasticsearch03:
+    build:
+      context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+        type: bind
+        source: ./elasticsearch/config/log4j2.properties
+        target: /usr/share/elasticsearch/config/log4j2.properties
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+      - type: bind
+        source: ./elasticsearch/logs
+        target: /usr/share/elasticsearch/logs
+        read_only: false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - node.name=elasticsearch03
+      - cluster.name=elasticsearch-cluster
+      - discovery.seed_hosts=elasticsearch01,elasticsearch02
+      - cluster.initial_master_nodes=elasticsearch01,elasticsearch02,elasticsearch03
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS: "-Xmx512m -Xms512m"
+      - ELASTIC_PASSWORD: changeme
     networks:
       - elk
 
