@@ -64,12 +64,10 @@ services:
       - "5000:5000"
       - "9600:9600"
     volumes:
-      - type: bind
-        source: ./logstash/config/logstash.yml
+      - source: ./logstash/config/logstash.yml
         target: /production/docker-elk/logstash/config/logstash.yml
         read_only: true
-      - type: bind
-        source: ./logstash/pipeline
+      - source: ./logstash/pipeline
         target: /production/docker-elk/logstash/pipeline
         read_only: true
     environment:
