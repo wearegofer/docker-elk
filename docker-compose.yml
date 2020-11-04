@@ -15,7 +15,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - data01:/usr/share/elasticsearch/data
+      - data01:/production/docker-elk/elasticsearch/data
     ports:
       - 9200:9200
     networks:
@@ -35,7 +35,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - data02:/usr/share/elasticsearch/data
+      - data02:/production/docker-elk/elasticsearch/data
     networks:
       - elastic
   es03:
@@ -53,7 +53,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - data03:/usr/share/elasticsearch/data
+      - data03:/production/docker-elk/elasticsearch/data
     networks:
       - elastic
 
@@ -69,8 +69,8 @@ services:
         target: /production/docker-elk/logstash/config/logstash.yml
         read_only: true
       - type: bind
-        source: ./logstash/pipeline/logstash.conf
-        target: /production/docker-elk/logstash/pipeline/logstash.conf
+        source: ./logstash/pipeline
+        target: /production/docker-elk/logstash/pipeline
         read_only: true
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
