@@ -57,37 +57,37 @@ services:
     networks:
       - elastic
 
-  # logstash:
-  #   image: docker.elastic.co/logstash/logstash:7.9.3
-  #   ports:
-  #     - "5044:5044"
-  #     - "5000:5000"
-  #     - "9600:9600"
-  #   configs:
-  #     - source: logstash_config
-  #       target: /usr/share/logstash/config/logstash.yml
-  #     - source: logstash_pipeline
-  #       target: /usr/share/logstash/pipeline/logstash.conf
-  #   environment:
-  #     LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-  #   networks:
-  #     - elastic
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.9.3
+    ports:
+      - "5044:5044"
+      - "5000:5000"
+      - "9600:9600"
+    configs:
+      - source: logstash_config
+        target: /production/docker-elk/logstash/config/logstash.yml
+      - source: logstash_pipeline
+        target: /production/docker-elk/logstash/pipeline/logstash.conf
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elastic
+    deploy:
+      mode: replicated
+      replicas: 1
 
-  # kibana:
-  #   image: docker.elastic.co/kibana/kibana:7.9.3
-  #   ports:
-  #     - "5601:5601"
-  #   configs:
-  #     - source: kibana_config
-  #       target: /usr/share/kibana/config/kibana.yml
-  #   networks:
-  #     - elastic
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.3
+    ports:
+      - "5601:5601"
+    configs:
+      - source: kibana_config
+        target: /production/docker-elk/kibana/config/kibana.yml
+    networks:
+      - elastic
+    deploy:
+      mode: replicated
+      replicas: 1
 
 volumes:
   data01:
