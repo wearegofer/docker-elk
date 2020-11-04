@@ -16,6 +16,10 @@ services:
         hard: -1
     volumes:
       - data01:/production/docker-elk/elasticsearch/data
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /production/docker-elk/elasticsearch/node01/config/elasticsearch.yml
+        read_only: true
     ports:
       - 9200:9200
     networks:
@@ -36,6 +40,10 @@ services:
         hard: -1
     volumes:
       - data02:/production/docker-elk/elasticsearch/data
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /production/docker-elk/elasticsearch/node02/config/elasticsearch.yml
+        read_only: true
     networks:
       - elastic
   es03:
@@ -54,6 +62,10 @@ services:
         hard: -1
     volumes:
       - data03:/production/docker-elk/elasticsearch/data
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /production/docker-elk/elasticsearch/node03/config/elasticsearch.yml
+        read_only: true
     networks:
       - elastic
 

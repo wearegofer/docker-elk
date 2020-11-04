@@ -2,7 +2,7 @@
 ## Default Elasticsearch configuration from Elasticsearch base image.
 ## https://github.com/elastic/elasticsearch/blob/master/distribution/docker/src/docker/config/elasticsearch.yml
 #
-cluster.name: "elasticsearch-cluster"
+cluster.name: "es-docker-cluster"
 network.host: 0.0.0.0
 
 ## X-Pack settings
@@ -13,7 +13,3 @@ xpack.security.enabled: true
 xpack.monitoring.collection.enabled: true
 
 logger.transport.level: info
-
-
-path:
-    logs: /usr/share/elasticsearch/logs
