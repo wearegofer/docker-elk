@@ -65,11 +65,13 @@ services:
       - "9600:9600"
     volumes:
       - type: bind
-        source: logstash/config/logstash_config
+        source: ./logstash/config/logstash_config
         target: /production/docker-elk/logstash/config/logstash.yml
+        read_only: true
       - type: bind
-        source: logstash/config/logstash_pipeline
+        source: ./logstash/config/logstash_pipeline
         target: /production/docker-elk/logstash/pipeline/logstash.conf
+        read_only: true
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
@@ -81,8 +83,9 @@ services:
       - "5601:5601"
     volumes:
       - type: bind
-        source: kibana/config/kibana_config
+        source: ./kibana/config/kibana_config
         target: /production/docker-elk/kibana/config/kibana.yml
+        read_only: true
     networks:
       - elastic
 
