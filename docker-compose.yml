@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.2'
 services:
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
@@ -64,10 +64,12 @@ services:
       - "5000:5000"
       - "9600:9600"
     volumes:
-      - source: ./logstash/config/logstash.yml
+      - type: bind
+        source: ./logstash/config/logstash.yml
         target: /production/docker-elk/logstash/config/logstash.yml
         read_only: true
-      - source: ./logstash/pipeline
+      - type: bind
+        source: ./logstash/pipeline
         target: /production/docker-elk/logstash/pipeline
         read_only: true
     environment:
