@@ -63,10 +63,10 @@ services:
       - "5044:5044"
       - "5000:5000"
       - "9600:9600"
-    configs:
-      - source: logstash_config
+    volumes:
+      - source: logstash/config/logstash_config
         target: /production/docker-elk/logstash/config/logstash.yml
-      - source: logstash_pipeline
+      - source: logstash/config/logstash_pipeline
         target: /production/docker-elk/logstash/pipeline/logstash.conf
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -80,8 +80,9 @@ services:
     image: docker.elastic.co/kibana/kibana:7.9.3
     ports:
       - "5601:5601"
-    configs:
-      - source: kibana_config
+    volumes:
+      - type: bind
+        source: kibana/config/kibana_config
         target: /production/docker-elk/kibana/config/kibana.yml
     networks:
       - elastic
