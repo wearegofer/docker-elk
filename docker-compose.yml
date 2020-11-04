@@ -79,8 +79,6 @@ services:
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.9.3
-    elasticsearch.hosts: [ "http://84.89.230.215:9200" ]
-    xpack.monitoring.ui.container.elasticsearch.enabled: true
     ports:
       - "5601:5601"
     volumes:
