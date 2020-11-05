@@ -86,6 +86,7 @@ services:
         read_only: true
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTICSEARCH_HOSTS: http://84.94.230.215:9200
     networks:
       - elastic
 
@@ -98,6 +99,8 @@ services:
         source: ./kibana/config/kibana.yml
         target: /production/docker-elk/kibana/config/kibana.yml
         read_only: true
+    environment: 
+      ELASTICSEARCH_HOSTS: http://84.94.230.215:9200
     networks:
       - elastic
 
