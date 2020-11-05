@@ -3,7 +3,7 @@
 ## https://github.com/elastic/kibana/blob/master/src/dev/build/tasks/os_packages/docker_generator/templates/kibana_yml.template.js
 #
 server.name: kibana
-server.host: 0.0.0.0
+server.host: 84.94.230.215
 elasticsearch.hosts: [ "http://84.94.230.215:9200" ]
 xpack.monitoring.elasticsearch.hosts: [ "http://84.94.230.215:9200" ]
 monitoring.ui.container.elasticsearch.enabled: false

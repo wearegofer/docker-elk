@@ -3,7 +3,7 @@
 ## https://github.com/elastic/elasticsearch/blob/master/distribution/docker/src/docker/config/elasticsearch.yml
 #
 cluster.name: "es-docker-cluster"
-network.host: 0.0.0.0
+network.host: 84.94.230.215
 
 ## X-Pack settings
 ## see https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-xpack.html
@@ -11,6 +11,6 @@ network.host: 0.0.0.0
 server.name: elasticsearch
 xpack.license.self_generated.type: trial
 xpack.security.enabled: true
-xpack.monitoring.collection.enabled: true
+xpack.monitoring.collection.enabled: false
 
 logger.transport.level: info
