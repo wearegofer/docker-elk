@@ -104,6 +104,8 @@ services:
       ELASTICSEARCH_URL:  http://84.94.230.215:9200 
     networks:
       - elastic
+    depends_on: 
+      - es01
 
 volumes:
   data01:

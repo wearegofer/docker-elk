@@ -6,7 +6,7 @@ server.name: kibana
 server.host: 0.0.0.0
 elasticsearch.hosts: [ "http://84.94.230.215:9200" ]
 xpack.monitoring.elasticsearch.hosts: [ "http://84.94.230.215:9200" ]
-monitoring.ui.container.elasticsearch.enabled: true
+monitoring.ui.container.elasticsearch.enabled: false
 
 ## X-Pack security credentials
 #
