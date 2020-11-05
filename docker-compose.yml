@@ -101,6 +101,7 @@ services:
         read_only: true
     environment: 
       ELASTICSEARCH_HOSTS: http://84.94.230.215:9200
+      ELASTICSEARCH_URL:  http://84.94.230.215:9200 
     networks:
       - elastic
 
